@@ -4,21 +4,32 @@ import Signup from '../pages/Signup';
 import Layout from '../components/ui/Layout';
 import Clients from '../pages/Clients';
 import ClientProviders from '../pages/ClientProviders';
+import ProfilePage from '../pages/ProfilePage';
+import PublicRoute from '../components/common/PublicRoute';
+import DashboardPage from '../pages/DashboardPage';
+import PrivateRoute from '../components/common/PrivateRoute';
 
 const AppRouter = () => (
   <BrowserRouter>
     <Routes>
-      <Route path="/login" element={<Login />} />
-      <Route path="/signup" element={<Signup />} />
 
-      <Route element={<Layout />}>
-        <Route path="/clients" element={<Clients />} />
-        <Route path="/question-sets" element={<div>Question Sets</div>} />
-        <Route path="/base-questions" element={<div>Base Questions</div>} />
-        <Route path="/clients/:id/providers" element={<ClientProviders />} />
-        <Route path="/ehr-mappings" element={<div>EHR Mappings</div>} />
-        <Route path="/ehr-providers" element={<div>EHR Providers</div>} />
-        <Route path="/" element={<Navigate to="/clients" replace />} />
+      <Route element={<PublicRoute />}>
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
+      </Route>
+
+      <Route element={<PrivateRoute />}>
+        <Route element={<Layout />}>
+          <Route path="/profile" element={<ProfilePage />} />
+          <Route path="/" element={<DashboardPage />} />
+          <Route path="/dashboard" element={<DashboardPage />} />
+          <Route path="/clients" element={<Clients />} />
+          <Route path="/question-sets" element={<div>Question Sets</div>} />
+          <Route path="/base-questions" element={<div>Base Questions</div>} />
+          <Route path="/clients/:id/providers" element={<ClientProviders />} />
+          <Route path="/ehr-mappings" element={<div>EHR Mappings</div>} />
+          <Route path="/ehr-providers" element={<div>EHR Providers</div>} />
+        </Route>
       </Route>
 
       <Route path="/*" element={<Navigate to="/login" replace />} />

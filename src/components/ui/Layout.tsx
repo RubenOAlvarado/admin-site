@@ -1,32 +1,19 @@
-import { useEffect, useState } from 'react';
-import { Outlet, useNavigate } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
 import Header from './Header';
 import Footer from './Footer';
-import supabase from '../../services/supabase/supabaseClients';
 
-export default function Layout() {
-  const navigate = useNavigate();
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const session = supabase.auth.getSession();
-    if (!session) navigate('/login');
-    setLoading(false);
-    const { data: authListener } = supabase.auth.onAuthStateChange((_, session) => {
-      if (!session) navigate('/login');
-    });
-    return () => { authListener?.subscription.unsubscribe(); };
-  }, [navigate]);
-
-  if (loading) return <div className="h-screen flex items-center justify-center">Cargando...</div>;
-
+const Layout: React.FC = () => {
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col min-h-screen bg-gray-100">
       <Header />
-      <main className="container mx-auto flex-1 p-4">
+      
+      <main className="flex-grow container mx-auto px-4 py-8">
         <Outlet />
       </main>
+      
       <Footer />
     </div>
   );
-}
+};
+
+export default Layout;
