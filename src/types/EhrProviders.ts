@@ -2,6 +2,8 @@
 export interface EhrProvider {
     code: string;
     name: string;
-    url: string;
-    authConfig?: Record<string, any>;
+    baseUrl: string;
+    isActive: boolean;
+    createdAt: Date;
+    updatedAt: Date;
 }

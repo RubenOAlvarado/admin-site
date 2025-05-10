@@ -26,9 +26,19 @@ api.interceptors.request.use(
     }
 );
 
-export const createClients = (data: Client) => {
+export const createClients = async (data: Client) => {
     try {
-        const response = api.post('/clients', data);
+        const response = await api.post('/clients', data);
+        return response;
+    } catch (error) {
+        console.error(error);
+        throw error;
+    }
+}
+
+export const updateClients = async (data: Client, clientId?: string) => {
+    try {
+        const response = await api.put(`/clients/${clientId}`, data);
         return response;
     } catch (error) {
         console.error(error);
@@ -46,9 +56,9 @@ export const fetchLanguages = async () => {
     }
 }
 
-export const fetchClients = () => {
+export const fetchClients = async () => {
     try {
-        const response = api.get('/clients');
+        const response = await api.get('/clients');
         return response;
     } catch (error) {
         console.error(error);
@@ -56,9 +66,9 @@ export const fetchClients = () => {
     }
 }
 
-export const createEhrProviders = (data: EhrProvider) => {
+export const createEhrProviders = async (data: EhrProvider) => {
     try {
-        const response = api.post('/ehr-providers', data);
+        const response = await api.post('/ehr-providers', data);
         return response;
     } catch (error) {
         console.error(error);
@@ -66,20 +76,20 @@ export const createEhrProviders = (data: EhrProvider) => {
     }
 }
 
-export const fetchEhrProviders = () => {
+export const fetchEhrProviders = async () => {
     try {
-        const response = api.get('/ehr-providers');
-        return response;
+        const response = await api.get('/ehr-providers');
+        return response.data;
     } catch (error) {
         console.error(error);
         throw error;
     }
 }
 
-export const fetchClientEhrAssignedProviders = (clientId: string) => {
+export const fetchClientEhrAssignedProviders = async (clientId: string) => {
     try {
-        const response = api.get(`/clients/${clientId}/ehr-providers`);
-        return response;
+        const response = await api.get(`/clients/${clientId}/ehr-providers`);
+        return response.data;
     } catch (error) {
         console.error(error);
         throw error;

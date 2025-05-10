@@ -2,8 +2,7 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import Login from '../pages/Login';
 import Signup from '../pages/Signup';
 import Layout from '../components/ui/Layout';
-import Clients from '../pages/Clients';
-import ClientProviders from '../pages/ClientProviders';
+import Clients from '../pages/ClientsPage';
 import ProfilePage from '../pages/ProfilePage';
 import PublicRoute from '../components/common/PublicRoute';
 import DashboardPage from '../pages/DashboardPage';
@@ -26,7 +25,6 @@ const AppRouter = () => (
           <Route path="/clients" element={<Clients />} />
           <Route path="/question-sets" element={<div>Question Sets</div>} />
           <Route path="/base-questions" element={<div>Base Questions</div>} />
-          <Route path="/clients/:id/providers" element={<ClientProviders />} />
           <Route path="/ehr-mappings" element={<div>EHR Mappings</div>} />
           <Route path="/ehr-providers" element={<div>EHR Providers</div>} />
         </Route>
