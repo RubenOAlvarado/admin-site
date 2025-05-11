@@ -1,7 +1,6 @@
 import axios from 'axios';
 import { Client } from '../../types/Clients';
 import supabase from '../supabase/supabaseClients';
-import { EhrClientProvider } from '../../types/ClientEhrProvider';
 import { EhrProvider } from '../../types/EhrProviders';
 
 const BASE_URL = import.meta.env.VITE_API_URL || import.meta.env.VITE_API_URL_FOR_DOCKER;
@@ -90,16 +89,6 @@ export const fetchClientEhrAssignedProviders = async (clientId: string) => {
     try {
         const response = await api.get(`/clients/${clientId}/ehr-providers`);
         return response.data;
-    } catch (error) {
-        console.error(error);
-        throw error;
-    }
-}
-
-export const assingEhrProviderToClient = (clientId: string, providersList: EhrClientProvider[]) => {
-    try {
-        const response = api.post(`/clients/${clientId}/ehr-providers`, providersList);
-        return response;
     } catch (error) {
         console.error(error);
         throw error;

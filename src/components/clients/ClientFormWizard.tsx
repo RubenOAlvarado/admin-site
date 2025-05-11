@@ -76,7 +76,7 @@ export default function ClientFormWizard({
       setError(null);
       
       if (existingClient) {
-       await updateClients(data, existingClient.id);
+       await updateClients(data, existingClient?.id);
       } else {
         await createClients(data);
       }
