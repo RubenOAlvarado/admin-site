@@ -33,13 +33,13 @@ export default function QuestionSetPage() {
     }
   }, [selectedClient]);
 
-  const handleSuccess = () => {
+  /* const handleSuccess = () => {
     setShowForm(false);
     setEditingSet(null);
     if (selectedClient) {
       fetchQuestionSets(selectedClient.id).then(({ data }) => setQuestionSets(data));
     }
-  };
+  }; */
 
   return (
     <div className="space-y-6">
@@ -74,7 +74,8 @@ export default function QuestionSetPage() {
           }}
           title={editingSet ? 'Edit Question Set' : 'New Question Set'}
         >
-          {selectedClient && (
+          <></>
+          {/* {selectedClient && (
             <QuestionSetForm
               existingSet={editingSet}
               clientId={selectedClient.id}
@@ -84,7 +85,7 @@ export default function QuestionSetPage() {
                 setEditingSet(null);
               }}
             />
-          )}
+          )} */}
         </Modal>
       ) : null}
 
