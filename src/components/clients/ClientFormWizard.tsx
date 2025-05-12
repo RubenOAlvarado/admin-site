@@ -12,7 +12,7 @@ import type { EhrProvider } from "../../types/EhrProviders";
 import type { Language } from "../../types/Languages";
 import React from "react";
 import { motion } from 'framer-motion';
-import { clientSchema } from "../../schemas/client";
+import { clientSchema } from "../../schemas/client.schema";
 
 type FormData = z.infer<typeof clientSchema>;
 

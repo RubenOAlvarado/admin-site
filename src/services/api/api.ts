@@ -85,10 +85,20 @@ export const fetchEhrProviders = async () => {
     }
 }
 
-export const fetchClientEhrAssignedProviders = async (clientId: string) => {
+export const createEhrProvider = async (data: EhrProvider) => {
     try {
-        const response = await api.get(`/clients/${clientId}/ehr-providers`);
-        return response.data;
+        const response = await api.post('/ehr-providers', data);
+        return response;
+    } catch (error) {
+        console.error(error);
+        throw error;
+    }
+}
+
+export const updateEhrProvider = async (data: EhrProvider, ehrProviderCode?: string) => {
+    try {
+        const response = await api.put(`/ehr-providers/${ehrProviderCode}`, data);
+        return response;
     } catch (error) {
         console.error(error);
         throw error;
