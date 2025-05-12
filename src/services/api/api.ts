@@ -1,8 +1,9 @@
 import axios from 'axios';
-import { Client } from '../../types/Clients';
 import supabase from '../supabase/supabaseClients';
 import { EhrProvider } from '../../types/EhrProviders';
 import { BaseQuestionFormData } from '../../schemas/base-question.schema';
+import { QuestionSetFormData } from '../../schemas/question-set.schema';
+import { ClientFormData } from '../../schemas/client.schema';
 
 const BASE_URL = import.meta.env.VITE_API_URL || import.meta.env.VITE_API_URL_FOR_DOCKER;
 const API_VERSION = import.meta.env.VITE_API_VERSION;
@@ -26,7 +27,7 @@ api.interceptors.request.use(
     }
 );
 
-export const createClients = async (data: Client) => {
+export const createClients = async (data: ClientFormData) => {
     try {
         const response = await api.post('/clients', data);
         return response;
@@ -36,7 +37,7 @@ export const createClients = async (data: Client) => {
     }
 }
 
-export const updateClients = async (data: Client, clientId?: string) => {
+export const updateClients = async (data: ClientFormData, clientId?: string) => {
     try {
         const response = await api.put(`/clients/${clientId}`, data);
         return response;
@@ -59,7 +60,7 @@ export const fetchLanguages = async () => {
 export const fetchClients = async () => {
     try {
         const response = await api.get('/clients');
-        return response;
+        return response.data;
     } catch (error) {
         console.error(error);
         throw error;
@@ -131,6 +132,36 @@ export const updateBaseQuestion = async (data: BaseQuestionFormData, baseQuestio
         const response = await api.put(`/base-questions/${baseQuestionCode}`, data);
         return response;
     } catch (error) {
+        console.error(error);
+        throw error;
+    }
+}
+
+export const fetchQuestionSets = async (clientId: string) => {
+    try {
+        const response = await api.get(`clients/${clientId}/question-sets`);
+        return response.data;
+    } catch (error) {
+        console.error(error);
+        throw error;
+    }
+}
+
+export const createQuestionSet = async (clientId: string, data: QuestionSetFormData) => {
+    try{
+        const response = await api.post(`clients/${clientId}/question-sets`, data);
+        return response;
+    } catch (error) {
+        console.error(error);
+        throw error;
+    }
+}
+
+export const updateQuestionSet = async (clientId: string, data: QuestionSetFormData, questionSetCode?: string) => {
+    try {
+        const response = await api.put(`clients/${clientId}/question-sets/${questionSetCode}`, data);
+        return response;
+    }catch (error) {
         console.error(error);
         throw error;
     }

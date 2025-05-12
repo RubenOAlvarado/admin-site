@@ -20,7 +20,7 @@ export default function ClientListPage() {
   const loadClients = async () => {
     try {
       setLoading(true);
-      const { data } = await fetchClients();
+      const data = await fetchClients();
       setClients(data);
     } finally {
       setLoading(false);

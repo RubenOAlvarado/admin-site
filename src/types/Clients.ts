@@ -1,5 +1,5 @@
 export interface Client {
-    id?: string;
+    id: string;
     name: string;
     externalId?: string | null;
     defaultLanguage: string;
