@@ -8,6 +8,7 @@ import ViewToggle from "../components/common/ViewToggle";
 import { PlusIcon } from "../components/ui/Icons/PlusIcon";
 import BaseQuestionsGridView from "../components/base-questions/BaseQuestionsGridView";
 import BaseQuestionsTableView from "../components/base-questions/BaseQuestionTableView";
+import Modal from "../components/ui/Modal";
 
 const BaseQuestionsListPage = () => {
   const [questions, setQuestions] = useState<BaseQuestion[]>([]);
@@ -71,7 +72,15 @@ const BaseQuestionsListPage = () => {
         )}
 
         {showForm || editingQuestion ? (
-          <BaseQuestionForm
+          <Modal
+            isOpen={showForm || !!editingQuestion}
+            onClose={() => {
+              setShowForm(false);
+              setEditingQuestion(null);
+            }}
+            title={editingQuestion ? "Edit Question" : "New Base Question"}
+          >
+            <BaseQuestionForm
               existingQuestion={editingQuestion}
               onSuccess={handleSuccess}
               onCancel={() => {
@@ -79,6 +88,7 @@ const BaseQuestionsListPage = () => {
                 setEditingQuestion(null);
               }}
             />
+          </Modal>
         ) : null}
     </div>
   );

@@ -8,6 +8,7 @@ import ClientFormWizard from '../components/clients/ClientFormWizard';
 import EmptyState from '../components/common/EmptyState';
 import ClientGridView from '../components/clients/ClientGridView';
 import ClientTableView from '../components/clients/ClientTableView';
+import Modal from '../components/ui/Modal';
 
 export default function ClientListPage() {
   const [clients, setClients] = useState<ClientWithRelations[]>([]);
@@ -59,14 +60,23 @@ export default function ClientListPage() {
       </div>
 
       {showForm || editingClient ? (
-        <ClientFormWizard 
-          existingClient={editingClient}
-          onSuccess={handleSuccess}
-          onCancel={() => {
+        <Modal
+          isOpen={showForm || editingClient !== undefined}
+          onClose={() => {
             setShowForm(false);
             setEditingClient(undefined);
           }}
-        />
+          title={editingClient? "Edit Client" : "New Client"}
+        >
+          <ClientFormWizard
+            existingClient={editingClient}
+            onSuccess={handleSuccess}
+            onCancel={() => {
+              setShowForm(false);
+              setEditingClient(undefined);
+            }}
+          />
+        </Modal>
       ) : null}
 
       {loading ? (

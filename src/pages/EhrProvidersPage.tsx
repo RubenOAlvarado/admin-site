@@ -8,6 +8,7 @@ import { fetchEhrProviders } from "../services/api/api";
 import { EhrProviderGridView } from "../components/providers/EhrProviderGridView";
 import { EhrProviderTableView } from "../components/providers/EhrProviderTableView";
 import EhrProviderForm from "../components/providers/EhrProviderForm";
+import Modal from "../components/ui/Modal";
 
 const EhrProviderListPage = () => {
   const [providers, setProviders] = useState<EhrProvider[]>([]);
@@ -61,14 +62,23 @@ const EhrProviderListPage = () => {
       </div>
 
       {showForm || editingProvider ? (
-        <EhrProviderForm
-          existingProvider={editingProvider}
-          onSuccess={handleSuccess}
-          onCancel={() => {
+        <Modal
+          isOpen={showForm || !!editingProvider}
+          title={editingProvider ? "Edit Provider" : "New Provider"}
+          onClose={() => {
             setShowForm(false);
             setEditingProvider(null);
           }}
-        />
+        >
+          <EhrProviderForm
+            existingProvider={editingProvider}
+            onSuccess={handleSuccess}
+            onCancel={() => {
+                setShowForm(false);
+                setEditingProvider(null);
+            }}
+          />
+        </Modal>
       ) : null}
 
       {loading ? (

@@ -108,12 +108,6 @@ export default function ClientFormWizard({
 
   return (
     <div className="bg-white rounded-lg border border-gray-200 shadow-sm overflow-hidden">
-      <div className="border-b border-gray-200 px-6 py-4">
-        <h2 className="text-lg font-medium text-gray-800">
-          {existingClient ? 'Edit Client' : 'Register New Client'}
-        </h2>
-      </div>
-      
       <div className="p-6">
         {error && (
           <div className="mb-4 p-3 bg-red-50 border-l-4 border-red-500 text-red-700 rounded flex items-start">
