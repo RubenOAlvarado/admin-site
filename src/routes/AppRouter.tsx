@@ -29,6 +29,7 @@ const AppRouter = () => (
           <Route path="/base-questions" element={<BaseQuestionsListPage />} />
           <Route path="/ehr-mappings" element={<div>EHR Mappings</div>} />
           <Route path="/ehr-providers" element={<EhrProviderListPage />} />
+          <Route path='/questions' element={<div>Questions</div>} />
         </Route>
       </Route>
 

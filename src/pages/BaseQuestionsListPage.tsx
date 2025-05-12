@@ -68,7 +68,11 @@ const BaseQuestionsListPage = () => {
             <BaseQuestionsTableView questions={questions} onEdit={setEditingQuestion} />
           )
         ) : (
-          <EmptyState onAddNew={() => setShowForm(true)}/>
+          <EmptyState 
+            onAddNew={() => setShowForm(true)}
+            buttonLabel="Create your first base question"
+            message="No base questions found. Create one now."
+          />
         )}
 
         {showForm || editingQuestion ? (

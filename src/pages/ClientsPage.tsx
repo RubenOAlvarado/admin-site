@@ -94,7 +94,11 @@ export default function ClientListPage() {
           />
         )
       ) : (
-        <EmptyState onAddNew={() => setShowForm(true)} />
+        <EmptyState 
+          onAddNew={() => setShowForm(true)} 
+          buttonLabel="Create your first client"
+          message="No Clents found. Create one now."
+        />
       )}
     </div>
   );

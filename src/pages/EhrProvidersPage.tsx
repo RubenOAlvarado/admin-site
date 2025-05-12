@@ -90,7 +90,11 @@ const EhrProviderListPage = () => {
           <EhrProviderTableView providers={providers} onEdit={setEditingProvider} />
         )
       ) : (
-        <EmptyState onAddNew={() => setShowForm(true)} />
+        <EmptyState 
+            onAddNew={() => setShowForm(true)} 
+            buttonLabel="Create your first EHR provider"
+            message="No EHR providers found. Create one now."
+        />
       )}
     </div>
   );
