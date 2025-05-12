@@ -8,3 +8,5 @@ export const ehrProviderSchema = z.object({
     baseUrl: z.string().url("Must be a valid URL"),
     authConfig: z.record(z.any()).optional()
 });
+
+export type EhrProviderFormData = z.infer<typeof ehrProviderSchema>;

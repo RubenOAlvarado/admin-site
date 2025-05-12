@@ -11,3 +11,5 @@ export const clientSchema = z.object({
         })
     ).min(1, 'At least one provider is required')
 });
+
+export type ClientFormData = z.infer<typeof clientSchema>;

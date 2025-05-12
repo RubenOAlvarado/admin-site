@@ -2,6 +2,7 @@ import axios from 'axios';
 import { Client } from '../../types/Clients';
 import supabase from '../supabase/supabaseClients';
 import { EhrProvider } from '../../types/EhrProviders';
+import { BaseQuestionFormData } from '../../schemas/base-question.schema';
 
 const BASE_URL = import.meta.env.VITE_API_URL || import.meta.env.VITE_API_URL_FOR_DOCKER;
 const API_VERSION = import.meta.env.VITE_API_VERSION;
@@ -98,6 +99,36 @@ export const createEhrProvider = async (data: EhrProvider) => {
 export const updateEhrProvider = async (data: EhrProvider, ehrProviderCode?: string) => {
     try {
         const response = await api.put(`/ehr-providers/${ehrProviderCode}`, data);
+        return response;
+    } catch (error) {
+        console.error(error);
+        throw error;
+    }
+}
+
+export const fetchBaseQuestions = async () => {
+    try {
+        const response = await api.get('/base-questions');
+        return response.data;
+    } catch (error) {
+        console.error(error);
+        throw error;
+    }
+}
+
+export const createBaseQuestion = async (data: BaseQuestionFormData) => {
+    try {
+        const response = await api.post('/base-questions', data);
+        return response;
+    } catch (error) {
+        console.error(error);
+        throw error;
+    }
+}
+
+export const updateBaseQuestion = async (data: BaseQuestionFormData, baseQuestionCode?: string) => {
+    try {
+        const response = await api.put(`/base-questions/${baseQuestionCode}`, data);
         return response;
     } catch (error) {
         console.error(error);

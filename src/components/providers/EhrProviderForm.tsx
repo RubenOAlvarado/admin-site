@@ -1,12 +1,10 @@
-import { z } from "zod";
-import { ehrProviderSchema } from "../../schemas/ehr-provider.schema";
+import { EhrProviderFormData, ehrProviderSchema } from "../../schemas/ehr-provider.schema";
 import { SpinnerIcon } from "../ui/Icons/SpinnerIcon";
 import { Controller, useForm } from "react-hook-form";
 import { ExclamationIcon } from "../ui/Icons/ExclamationIcon";
 import { createEhrProvider, updateEhrProvider } from "../../services/api/api";
 import { zodResolver } from "@hookform/resolvers/zod";
-
-type EhrProviderFormData = z.infer<typeof ehrProviderSchema>;
+import { KeyValueEditor } from "../common/KeyValueEditor";
 
 interface EhrProviderFormProps {
   existingProvider?: Partial<EhrProviderFormData> | null;
@@ -118,24 +116,9 @@ const EhrProviderForm: React.FC<EhrProviderFormProps> = ({
             name="authConfig"
             control={control}
             render={({ field }) => (
-              <textarea
-                {...field}
-                rows={4}
-                className="w-full border border-gray-300 rounded-md p-2 font-mono text-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
-                placeholder='{"clientId": "your-client-id", "clientSecret": "your-secret"}'
-                value={
-                    typeof field.value === "object" && field.value !== null
-                    ? JSON.stringify(field.value, null, 2)
-                    : field.value || ""
-                }
-                onChange={(e) => {
-                    try {
-                        const parsed = JSON.parse(e.target.value);
-                        field.onChange(parsed);
-                    } catch {
-                        field.onChange(e.target.value);
-                    }
-                }}
+              <KeyValueEditor
+                value={field.value}
+                onChange={(v) => field.onChange(v)}
               />
             )}
           />

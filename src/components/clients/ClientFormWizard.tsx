@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { z } from 'zod';
 import { ArrowLeftIcon } from "../ui/Icons/ArrowLeftIcon";
 import { ArrowRightIcon } from "../ui/Icons/ArrowRightIcon";
 import { ExclamationIcon } from "../ui/Icons/ExclamationIcon";
@@ -12,9 +11,7 @@ import type { EhrProvider } from "../../types/EhrProviders";
 import type { Language } from "../../types/Languages";
 import React from "react";
 import { motion } from 'framer-motion';
-import { clientSchema } from "../../schemas/client.schema";
-
-type FormData = z.infer<typeof clientSchema>;
+import { ClientFormData, clientSchema } from "../../schemas/client.schema";
 
 export default function ClientFormWizard({
   existingClient,
@@ -31,7 +28,7 @@ export default function ClientFormWizard({
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const { register, handleSubmit, watch, setValue, formState: { errors } } = useForm<FormData>({
+  const { register, handleSubmit, watch, setValue, formState: { errors } } = useForm<ClientFormData>({
     resolver: zodResolver(clientSchema),
     defaultValues: existingClient ? {
       name: existingClient.name,
@@ -70,7 +67,7 @@ export default function ClientFormWizard({
     loadData();
   }, []);
 
-  const onSubmit = async (data: FormData) => {
+  const onSubmit = async (data: ClientFormData) => {
     try {
       setLoading(true);
       setError(null);

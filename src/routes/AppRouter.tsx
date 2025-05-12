@@ -8,6 +8,7 @@ import PublicRoute from '../components/common/PublicRoute';
 import DashboardPage from '../pages/DashboardPage';
 import PrivateRoute from '../components/common/PrivateRoute';
 import EhrProviderListPage from '../pages/EhrProvidersPage';
+import BaseQuestionsListPage from '../pages/BaseQuestionsListPage';
 
 const AppRouter = () => (
   <BrowserRouter>
@@ -25,7 +26,7 @@ const AppRouter = () => (
           <Route path="/dashboard" element={<DashboardPage />} />
           <Route path="/clients" element={<Clients />} />
           <Route path="/question-sets" element={<div>Question Sets</div>} />
-          <Route path="/base-questions" element={<div>Base Questions</div>} />
+          <Route path="/base-questions" element={<BaseQuestionsListPage />} />
           <Route path="/ehr-mappings" element={<div>EHR Mappings</div>} />
           <Route path="/ehr-providers" element={<EhrProviderListPage />} />
         </Route>
